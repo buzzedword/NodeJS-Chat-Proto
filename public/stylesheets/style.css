@@ -1,8 +1,18 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;   
 }
-
 a {
   color: #00B7FF;
+}
+
+div.introduction {
+  padding: 50px;
+}
+div#chat_context {
+    height: 500px;
+    overflow-y: scroll;
+}
+div#connected_context {
+    height: 500px;
+    overflow-y: scroll;
 }

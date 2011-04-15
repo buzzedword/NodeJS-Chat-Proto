@@ -1,8 +1,10 @@
-!!!
-html
+!!! 5
+html(lang="en")
   head
     title= title
+    link(rel='stylesheet', href='http://960ls.atomidata.com/static/cssserve/2011/4/15/f0d62de7678c463cad5bcece42d9559f.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/socket.io/socket.io.js')
     script(src='/javascripts/app.js')
-  body!= body
+  body
+    div#container.container_12!= body

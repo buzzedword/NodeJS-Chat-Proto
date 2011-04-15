@@ -27,7 +27,7 @@ var chat = {}, response = {}, session = {};
 	response.writeMessage = function(msg){
      	var element = document.createElement('p');
 		element.innerHTML = msg;
-		document.getElementsByTagName('body')[0].appendChild(element);
+		document.getElementById('chat_context').appendChild(element);
 	};
 	
 	session.setStatus = function(status){
@@ -40,7 +40,8 @@ var chat = {}, response = {}, session = {};
 	
 	(function(){
 		socket.on('connect', function(){
-		  document.getElementsByTagName('body')[0].innerHTML = '';
+		  document.getElementById('chat_context').innerHTML = '';
+    	  document.getElementById('connected_context').innerHTML = '';          
 		  session.setStatus = true;
 		}); 
 		socket.on('message', function(data){
