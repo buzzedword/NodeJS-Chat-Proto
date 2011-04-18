@@ -1,6 +1,5 @@
 var chat = {}, response = {}, session = {}; 
 (function(){
-$(function(){
 	var socket = new io.Socket(), _response = {}, _status = {}; 
 	chat.sendID = function(UID){
 		if (typeof UID == 'undefined') {
@@ -18,14 +17,6 @@ $(function(){
 			'type' : 'message'
 		});
 	};
-    chat.requestStatus = function(){
-        socket.send({
-            'type' : 'status'
-        });
-    };
-    chat.disconnect = function(){
-        socket.disconnect();  
-    };
 	
 	response.setSession = function(sessionId){
 		_response.ID = sessionId;
@@ -34,11 +25,9 @@ $(function(){
 		return _response.ID;
 	};
 	response.writeMessage = function(msg){
-     	var element = document.createElement('p'), context;
+     	var element = document.createElement('p');
 		element.innerHTML = msg;
-        context = document.getElementById('chat_context');
-		context.appendChild(element);
-        context.scrollTop = context.scrollHeight;
+		document.getElementById('chat_context').appendChild(element);
 	};
 	
 	session.setStatus = function(status){
@@ -63,9 +52,6 @@ $(function(){
 				case 'private' :
 					// not implemented yet
 					break;
-                case 'status' :
-                    response.remoteStatus = data.content;
-                    break;
 				default :
 					response.writeMessage(data.content);			
 			}
@@ -74,5 +60,4 @@ $(function(){
 		  session.setStatus = false;		
 		}); 
 	}());
-});
 }());
