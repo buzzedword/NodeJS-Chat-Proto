@@ -1,5 +1,6 @@
 var chat = {}, response = {}, session = {}; 
 (function(){
+$(function(){
 	var socket = new io.Socket(), _response = {}, _status = {}; 
 	chat.sendID = function(UID){
 		if (typeof UID == 'undefined') {
@@ -17,6 +18,14 @@ var chat = {}, response = {}, session = {};
 			'type' : 'message'
 		});
 	};
+    chat.requestStatus = function(){
+        socket.send({
+            'type' : 'status'
+        });
+    };
+    chat.disconnect = function(){
+        socket.disconnect();  
+    };
 	
 	response.setSession = function(sessionId){
 		_response.ID = sessionId;
@@ -25,9 +34,11 @@ var chat = {}, response = {}, session = {};
 		return _response.ID;
 	};
 	response.writeMessage = function(msg){
-     	var element = document.createElement('p');
+     	var element = document.createElement('p'), context;
 		element.innerHTML = msg;
-		document.getElementById('chat_context').appendChild(element);
+        context = document.getElementById('chat_context');
+		context.appendChild(element);
+        context.scrollTop = context.scrollHeight;
 	};
 	
 	session.setStatus = function(status){
@@ -52,6 +63,9 @@ var chat = {}, response = {}, session = {};
 				case 'private' :
 					// not implemented yet
 					break;
+                case 'status' :
+                    response.remoteStatus = data.content;
+                    break;
 				default :
 					response.writeMessage(data.content);			
 			}
@@ -60,4 +74,5 @@ var chat = {}, response = {}, session = {};
 		  session.setStatus = false;		
 		}); 
 	}());
+});
 }());
