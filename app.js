@@ -6,7 +6,10 @@ require.paths.unshift('node_modules');
 
 var express = require('express'),
     app = module.exports = express.createServer(),
-    socket = require('./classes/socket');
+    socket = {
+        parent : require('./classes/socket'),
+        functions : function(){}
+    };
 
 // Configuration
 
@@ -42,4 +45,4 @@ if (!module.parent) {
   console.log("Express server listening on port %d", app.address().port);
 }
 
-socket.init(app);
+socket.parent.init(app);

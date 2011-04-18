@@ -6,13 +6,27 @@ a {
 }
 
 div.introduction {
-  padding: 50px;
+  padding: 30px;
 }
 div#chat_context {
-    height: 500px;
+    height: 400px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 div#connected_context {
-    height: 500px;
+    height: 400px;
     overflow-y: scroll;
+}
+div.submit {
+    margin-left:10px;
+    float:left;
+    width: 50px;
+    height:20px;
+    border: solid 1px black;
+    background: gray;
+}
+
+div.submit:hover{
+    cursor:hand;
+    cursor:pointer;
 }
