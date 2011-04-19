@@ -92,6 +92,7 @@ $(function(){
                     response.remoteStatus = data.content;
                     break;
                 case 'update' :
+                    console.log(data.content);
                     var user = data.content, context = $('#connected_context'), uList = '';
                     for (var i in user){
                         uList += '<p>' + user[i].identity + '</p>';
