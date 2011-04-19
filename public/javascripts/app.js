@@ -12,6 +12,7 @@ $(function(){
 			'content' : UID,
 			'type'	: 'UID'
 		});
+        enableChat();
 	};
 	chat.sendMessage = function(msg){
 		socket.send({
@@ -49,13 +50,15 @@ $(function(){
 		return _status.connected;
 	};
 	
-    $('form').submit(function(e){
-        console.log('test');
-        e.preventDefault;
-    }).bind('keydown keypress', function(e){
-        console.log('hi');    
+    $('input').bind('keypress', function(e){
+       var enter = (e.keyCode === 13); 
+       ((enter)? chat.sendID($('#username').attr('value')) : false);
     });
-	
+    
+    function enableChat() {
+        $('#footer').show();   
+    }
+    
 	(function(){
 		socket.on('connect', function(){
 		  document.getElementById('chat_context').innerHTML = '';
