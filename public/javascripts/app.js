@@ -1,7 +1,8 @@
 var chat = {}, response = {}, session = {}; 
 (function(){
 $(function(){
-	var socket = new io.Socket(), _response = {}, _status = {}; 
+	var socket = new io.Socket(), _response = {}, _status = {};
+    $('#uname').button();
 	chat.sendID = function(UID){
 		if (typeof UID == 'undefined') {
 			UID = 'unidentified';
@@ -48,6 +49,12 @@ $(function(){
 		return _status.connected;
 	};
 	
+    $('form').submit(function(e){
+        console.log('test');
+        e.preventDefault;
+    }).bind('keydown keypress', function(e){
+        console.log('hi');    
+    });
 	
 	(function(){
 		socket.on('connect', function(){
