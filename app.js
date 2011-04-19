@@ -1,8 +1,6 @@
-
 /**
  * Module dependencies.
  */
-require.paths.unshift('node_modules');
 
 var express = require('express'),
     app = module.exports = express.createServer(),
