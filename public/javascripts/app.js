@@ -52,22 +52,22 @@ $(function(){
 	
     $('#username').bind('keypress', function(e){
        var enter = (e.keyCode === 13); 
-       ((enter)? chat.sendID($('#username').attr('value')) : false);
+       ((enter && $('#username').attr('value') != '')? chat.sendID($('#username').attr('value')) : false);
     });
     
     $('#usubmit').click(function(e){
         var enter = (e.keyCode === 13); 
-       ((enter)? chat.sendID($('#username').attr('value')) : false);
+       ((enter && $('#username').attr('value') != '')? chat.sendID($('#username').attr('value')) : false);
     });
     
     $('#chatty').bind('keypress', function(e){
        var enter = (e.keyCode === 13); 
-       ((enter)? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
+       ((enter && $('#chatty').attr('value') != '')? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
     });
     
     $('#submit').click(function(e){
         var enter = (e.keyCode === 13); 
-       ((enter)? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
+       ((enter && $('#chatty').attr('value') != '')? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
     });
     
     function enableChat() {
@@ -92,10 +92,11 @@ $(function(){
                     response.remoteStatus = data.content;
                     break;
                 case 'update' :
-                    var user = data.content;
+                    var user = data.content, context = $('#connected_context'), uList = '';
                     for (var i in user){
-                        $('#connected_context').append('<p>' + user[i].identity + '</p>');
+                        uList += '<p>' + user[i].identity + '</p>';
                     }
+                    context.html(uList);
                     break;
 				default :
 					response.writeMessage(data.content);			
