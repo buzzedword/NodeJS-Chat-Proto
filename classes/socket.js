@@ -20,6 +20,16 @@ socket.on('connection', function(client){
 		chat.solo(message);
 		chat.broadcast(message);
 	};
+    chat.updateRoom = function(){
+    	client.send({
+			'content' : clientTable,
+			'type' : 'update'
+		});        
+    	client.broadcast({
+			'content' : clientTable,
+			'type' : 'update'
+		});        
+    }
 	
     console.log(clientTable);
     clientTable.push({'session': client.sessionId});
@@ -50,10 +60,13 @@ socket.on('connection', function(client){
 				currentUser.identity = data.content;
 				chat.broadcast(currentUser.identity+' has connected.');								
 			}
+            clientTable[currentUser.index].identity = currentUser.identity;
+            chat.updateRoom();
 			break;
   	}
   }) 
-  client.on('disconnect', function(){ 
+  client.on('disconnect', function(){
+    chat.updateRoom();      
   	console.log('Client disconnected.');
     chat.broadcast(currentUser.identity+' has disconnected.');
     clientTable.splice(currentUser['index']);

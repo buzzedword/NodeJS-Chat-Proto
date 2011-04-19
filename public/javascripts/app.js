@@ -50,9 +50,24 @@ $(function(){
 		return _status.connected;
 	};
 	
-    $('input').bind('keypress', function(e){
+    $('#username').bind('keypress', function(e){
        var enter = (e.keyCode === 13); 
        ((enter)? chat.sendID($('#username').attr('value')) : false);
+    });
+    
+    $('#usubmit').click(function(e){
+        var enter = (e.keyCode === 13); 
+       ((enter)? chat.sendID($('#username').attr('value')) : false);
+    });
+    
+    $('#chatty').bind('keypress', function(e){
+       var enter = (e.keyCode === 13); 
+       ((enter)? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
+    });
+    
+    $('#submit').click(function(e){
+        var enter = (e.keyCode === 13); 
+       ((enter)? (function(){ chat.sendMessage($('#chatty').attr('value')); $('#chatty').attr('value', '');}()): false);
     });
     
     function enableChat() {
@@ -75,6 +90,12 @@ $(function(){
 					break;
                 case 'status' :
                     response.remoteStatus = data.content;
+                    break;
+                case 'update' :
+                    var user = data.content;
+                    for (var i in user){
+                        $('#connected_context').append('<p>' + user[i].identity + '</p>');
+                    }
                     break;
 				default :
 					response.writeMessage(data.content);			
