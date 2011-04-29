@@ -1,14 +1,19 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;   
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: #4B4934; 
 }
 a {
   color: #00B7FF;
 }
-
+div#container {
+background: #EFEACC;  
+}
 div.introduction {
+  
   padding: 30px;
 }
 div#chat_context {
+    background: #FFFFFF;
     height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
